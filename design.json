@@ -1,0 +1,355 @@
+{
+    "$schema": "https://design-system.schema/v1",
+    "meta": {
+      "name": "Next.js Dark UI — JSON Style Profile",
+      "source": "Screenshots of nextjs.org (dark theme) provided by user",
+      "version": "1.0.0",
+      "brand_note": "Neutral, product-first aesthetic; dark surfaces, high-contrast white text, subtle gray borders, minimal accent color usage."
+    },
+  
+    "foundations": {
+      "colors": {
+        "palette": {
+          "bg.body": {"hex": "#0A0A0A", "usage": ["Page background"]},
+          "bg.surface": {"hex": "#111111", "usage": ["Cards", "Modals", "Nav bar", "Dropdowns"]},
+          "bg.elevated": {"hex": "#141414", "usage": ["Hovered cards", "Floating layers"]},
+          "bg.input": {"hex": "#0E0E0E", "usage": ["Form fields", "Search bars"]},
+  
+          "border.low": {"hex": "#1F1F1F", "usage": ["Default card borders", "Dividers", "Input borders"]},
+          "border.med": {"hex": "#2A2A2A", "usage": ["Buttons default border", "Section outlines"]},
+          "border.high": {"hex": "#3A3A3A", "usage": ["Hover/active borders", "Focus rings (outer)"]},
+  
+          "text.primary": {"hex": "#FFFFFF", "usage": ["Headlines", "Primary body text"]},
+          "text.secondary": {"hex": "#C7C7C7", "usage": ["Secondary copy", "Metadata"]},
+          "text.tertiary": {"hex": "#9B9B9B", "usage": ["Captions", "Button secondary label"]},
+          "text.inverse": {"hex": "#0A0A0A", "usage": ["On light chips or inverse badges"]},
+          "text.muted": {"hex": "#7A7A7A", "usage": ["Disabled text"]},
+  
+          "icon.default": {"hex": "#D4D4D4", "usage": ["Static icons"]},
+          "icon.muted": {"hex": "#9A9A9A", "usage": ["Disabled icons"]},
+  
+          "accent.primary": {"hex": "#FFFFFF", "usage": ["Primary button fill (solid variant)", "Key CTA text on dark surfaces"]},
+          "accent.link": {"hex": "#E5E5E5", "usage": ["Links in paragraphs, subtle"]},
+          "accent.selection": {"hex": "#262626", "usage": ["Selected tiles/cards background"]},
+  
+          "success": {"hex": "#22C55E", "usage": ["Badges, success states"]},
+          "warning": {"hex": "#F59E0B", "usage": ["Badges, warnings"]},
+          "danger": {"hex": "#EF4444", "usage": ["Destructive actions, errors"]},
+  
+          "shadow.tint": {"hex": "#000000", "usage": ["Ambient shadow color base (with opacity)"]}
+        },
+  
+        "gradients": {
+          "hero.softSpot": {
+            "type": "radial",
+            "stops": [
+              {"hex": "#1A1A1A", "at": "0%"},
+              {"hex": "#0B0B0B", "at": "100%"}
+            ],
+            "angle_or_shape": "radial-circle",
+            "applies_to": ["Hero section background behind headline"],
+            "note": "Very subtle; treat as barely-visible vignette to avoid banding."
+          },
+          "tile.gloss": {
+            "type": "linear",
+            "stops": [
+              {"hex": "#151515", "at": "0%"},
+              {"hex": "#111111", "at": "100%"}
+            ],
+            "angle_or_shape": "to bottom",
+            "applies_to": ["Interactive tiles on 'What’s in Next.js?' grid on hover"]
+          }
+        }
+      },
+  
+      "typography": {
+        "font_families": {
+          "sans": {"stack": "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'", "usage": ["All text"]},
+          "mono": {"stack": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace", "usage": ["Code, inline code, tags like `npX create-next-app@latest`"]}
+        },
+        "scale": {
+          "display": {"size": "64px", "lineHeight": "1.05", "weight": 800, "tracking": "-0.02em"},
+          "h1": {"size": "48px", "lineHeight": "1.1", "weight": 800, "tracking": "-0.02em"},
+          "h2": {"size": "32px", "lineHeight": "1.15", "weight": 700},
+          "h3": {"size": "24px", "lineHeight": "1.2", "weight": 700},
+          "body.lg": {"size": "18px", "lineHeight": "1.65", "weight": 400},
+          "body.md": {"size": "16px", "lineHeight": "1.7", "weight": 400},
+          "body.sm": {"size": "14px", "lineHeight": "1.7", "weight": 400},
+          "caption": {"size": "12px", "lineHeight": "1.6", "weight": 400},
+          "mono.code": {"size": "14px", "lineHeight": "1.6", "weight": 500}
+        },
+        "contrast_requirements": {
+          "text.primary_on_bg.body": ">= 12.0 (white on #0A0A0A)",
+          "text.secondary_on_bg.surface": ">= 4.5",
+          "link_on_bg.surface": ">= 4.5"
+        }
+      },
+  
+      "radii": {
+        "none": "0px",
+        "xs": "6px",
+        "sm": "8px",
+        "md": "12px",
+        "lg": "16px",
+        "pill": "999px",
+        "usage": {
+          "buttons": "sm",
+          "cards": "md",
+          "chips": "pill",
+          "inputs": "sm",
+          "tiles.grid": "lg"
+        }
+      },
+  
+      "spacing": {
+        "scale": {"0": "0", "1": "4px", "2": "8px", "3": "12px", "4": "16px", "5": "20px", "6": "24px", "8": "32px", "10": "40px", "12": "48px", "16": "64px", "24": "96px"},
+        "patterns": {
+          "container.x": "24px",
+          "card.padding": "24px",
+          "section.v": "80px",
+          "grid.gap": "24px",
+          "navbar.h": "16px",
+          "button.px": "16px",
+          "button.py": "10px",
+          "chip.px": "10px",
+          "chip.py": "6px"
+        }
+      },
+  
+      "shadows": {
+        "elevation.0": {"value": "none", "usage": ["Base surfaces"]},
+        "elevation.1": {"value": "0px 1px 0px rgba(255,255,255,0.02), 0px 0px 0px 1px rgba(255,255,255,0.03) inset", "usage": ["Cards default (gives crisp edge on dark)"]},
+        "elevation.2": {"value": "0 8px 24px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25)", "usage": ["Hover on cards, dropdowns"]},
+        "focus.ring": {"value": "0 0 0 2px #3A3A3A", "usage": ["Keyboard focus for interactive components"]}
+      },
+  
+      "iconography": {
+        "style": "Line or simple filled geometric marks; no soft-color fills; 1–2px strokes against dark surfaces",
+        "sizes": {"sm": "16px", "md": "20px", "lg": "24px"},
+        "color_rules": {
+          "navigation": "icon.default",
+          "action": "text.primary",
+          "disabled": "icon.muted"
+        }
+      }
+    },
+  
+    "components": {
+      "Button": {
+        "variants": {
+          "solid": {
+            "default": {
+              "bg": "accent.primary",
+              "text": "text.inverse",
+              "border": "border.med",
+              "radius": "radii.sm",
+              "shadow": "elevation.0"
+            },
+            "hover": {
+              "bg": "#F5F5F5",
+              "text": "text.inverse",
+              "border": "border.high"
+            },
+            "active": {
+              "bg": "#EAEAEA",
+              "border": "border.high"
+            },
+            "disabled": {
+              "bg": "#1A1A1A",
+              "text": "text.muted",
+              "border": "border.low"
+            },
+            "focus": {"shadow": "focus.ring"}
+          },
+          "ghost": {
+            "default": {
+              "bg": "transparent",
+              "text": "text.primary",
+              "border": "border.med"
+            },
+            "hover": {"bg": "#151515", "border": "border.high"},
+            "active": {"bg": "#1A1A1A"},
+            "disabled": {"text": "text.muted", "border": "border.low"},
+            "focus": {"shadow": "focus.ring"}
+          },
+          "link": {
+            "default": {"text": "accent.link", "underline": false},
+            "hover": {"text": "text.primary", "underline": true},
+            "active": {"text": "text.primary"},
+            "disabled": {"text": "text.muted"}
+          }
+        },
+        "size": {"md": {"px": "spacing.button.px", "py": "spacing.button.py"}, "lg": {"px": "20px", "py": "12px"}}
+      },
+  
+      "Card": {
+        "default": {
+          "bg": "bg.surface",
+          "text": "text.primary",
+          "border": "border.low",
+          "radius": "radii.md",
+          "padding": "spacing.card.padding",
+          "shadow": "elevation.1"
+        },
+        "hover": {"bg": "bg.elevated", "border": "border.med", "shadow": "elevation.2"},
+        "selected": {"bg": "accent.selection", "border": "border.high"},
+        "disabled": {"opacity": 0.6}
+      },
+  
+      "Navbar": {
+        "container": {
+          "bg": "bg.body",
+          "borderBottom": "1px solid #1A1A1A",
+          "height": "64px",
+          "paddingX": "spacing.navbar.h",
+          "shadow": "elevation.0"
+        },
+        "item": {
+          "text": "text.secondary",
+          "hover_text": "text.primary",
+          "active_underline": {"color": "#2E2E2E", "height": "2px", "radius": "radii.xs"}
+        },
+        "ctaButtonVariant": "ghost"
+      },
+  
+      "Tag/Badge": {
+        "neutral": {
+          "bg": "#1A1A1A",
+          "text": "text.secondary",
+          "border": "border.med",
+          "radius": "radii.pill",
+          "padding": {"x": "10px", "y": "6px"}
+        },
+        "success": {"bg": "#0F3A1F", "text": "#A7F3D0", "border": "#1F6A3A"},
+        "warning": {"bg": "#3A2A0A", "text": "#FDE68A", "border": "#7C5E1A"}
+      },
+  
+      "Input": {
+        "default": {
+          "bg": "bg.input",
+          "text": "text.primary",
+          "placeholder": "text.tertiary",
+          "border": "border.low",
+          "radius": "radii.sm",
+          "shadow": "elevation.0",
+          "padding": {"x": "12px", "y": "10px"}
+        },
+        "hover": {"border": "border.med"},
+        "focus": {"border": "border.high", "shadow": "focus.ring"},
+        "disabled": {"bg": "#0D0D0D", "text": "text.muted", "border": "border.low"}
+      },
+  
+      "CodeSnippet": {
+        "inline": {
+          "font": "mono",
+          "bg": "#151515",
+          "text": "#EAEAEA",
+          "border": "border.low",
+          "radius": "radii.xs",
+          "padding": {"x": "6px", "y": "2px"}
+        },
+        "block": {
+          "bg": "#0D0D0D",
+          "border": "border.low",
+          "radius": "radii.md",
+          "padding": "16px",
+          "scrollbar": {"thumb": "#2A2A2A", "track": "#111111"}
+        }
+      },
+  
+      "TileGridItem": {
+        "default": {
+          "bg": "bg.surface",
+          "border": "border.low",
+          "radius": "radii.lg",
+          "shadow": "elevation.1",
+          "gradient": "gradients.tile.gloss",
+          "icon.color": "icon.default",
+          "title.text": "text.primary",
+          "body.text": "text.secondary",
+          "padding": "24px"
+        },
+        "hover": {"shadow": "elevation.2", "border": "border.med", "bg": "bg.elevated"},
+        "active": {"border": "border.high"},
+        "disabled": {"opacity": 0.6}
+      },
+  
+      "Footer": {
+        "bg": "bg.body",
+        "text.primary": "text.secondary",
+        "link": {"default": "accent.link", "hover": "text.primary"},
+        "divider": {"color": "border.low"}
+      }
+    },
+  
+    "behavior_and_effects": {
+      "animations": {
+        "hover.fade": {"property": "background, border-color, box-shadow, color", "duration": "160ms", "easing": "cubic-bezier(0.2,0,0,1)"},
+        "focus.ring": {"property": "box-shadow", "duration": "120ms", "easing": "ease-out"}
+      },
+      "rules": [
+        "Shadows are applied to containers (cards, dropdowns, tiles), not to glyph icons.",
+        "Gradients are extremely subtle; reserve for hero/tile surfaces only.",
+        "Borders on dark surfaces are mandatory to define edges; minimum 1px using 'border.low'."
+      ]
+    },
+  
+    "layout": {
+      "grid": {
+        "content_max_width": "1200px",
+        "columns": 12,
+        "gutter": "24px",
+        "section_spacing_y": "96px"
+      },
+      "containers": {
+        "card": {"padding": "spacing.card.padding", "radius": "radii.md", "border": "border.low", "bg": "bg.surface"},
+        "chip": {"padding": "chip.px/chip.py", "radius": "radii.pill"}
+      }
+    },
+  
+    "contextual_rules": {
+      "containers_vs_icons": {
+        "containers": {"bg": ["bg.surface", "bg.elevated"], "borders": ["border.low", "border.med"], "shadows": ["elevation.1", "elevation.2"]},
+        "icons": {"bg": "transparent", "color": "icon.default", "no_shadow": true}
+      },
+      "buttons_on_backgrounds": [
+        {"background": "bg.body", "button.variant": "solid", "button.bg": "accent.primary", "button.text": "text.inverse"},
+        {"background": "bg.surface", "button.variant": "ghost", "button.text": "text.primary", "button.border": "border.med"}
+      ],
+      "card_in_card": {
+        "outer_card.border": "border.low",
+        "inner_card.border": "transparent",
+        "spacing_between": "spacing.4"
+      }
+    },
+  
+    "accessibility": {
+      "focus": {
+        "visible_focus_required": true,
+        "ring": "focus.ring",
+        "outline_offset": "2px"
+      },
+      "contrast_matrix": [
+        {"foreground": "text.primary", "background": "bg.surface", "ratio": ">= 12.0"},
+        {"foreground": "text.secondary", "background": "bg.surface", "ratio": ">= 4.5"},
+        {"foreground": "accent.link", "background": "bg.surface", "ratio": ">= 4.5"},
+        {"foreground": "text.inverse", "background": "accent.primary", "ratio": ">= 7.0"}
+      ]
+    },
+  
+    "do_dont": {
+      "DO": [
+        "Use 'border.low' on all dark surfaces to provide edge definition.",
+        "Apply 'elevation.2' only on hover/floating layers to signal interactivity.",
+        "Keep gradients subtle; prefer solid neutrals for most surfaces.",
+        "Use 'mono' font for inline code and command pills."
+      ],
+      "DONT": [
+        "Do not apply tile or hero gradients to icons or text.",
+        "Do not use 'accent.primary' for body text; it is a fill color for CTAs.",
+        "Do not put heavy drop shadows on small icons or buttons.",
+        "Do not use light backgrounds within dark theme unless the component explicitly calls for inverse styling."
+      ]
+    }
+  }
+  
