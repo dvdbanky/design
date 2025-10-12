@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
@@ -10,8 +10,44 @@ import TileGridItem from '@/components/TileGridItem';
 import Aurora from '@/components/Aurora';
 import InfoPanel from '@/components/InfoPanel';
 
+interface WebhookItem {
+  row_number: number;
+  Artist: string;
+  Title: string;
+}
+
+type WebhookData = WebhookItem[];
+
 export default function Home() {
   const [isInfoPanelOpen, setIsInfoPanelOpen] = useState(false);
+  const [webhookData, setWebhookData] = useState<WebhookData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://dvdbanky.app.n8n.cloud/webhook/fdc16ec6-6166-46c5-9733-f8180d398bc4', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setWebhookData(data);
+        } else {
+          console.error('Failed to fetch data from webhook');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white relative">
@@ -29,11 +65,10 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h1 className="text-6xl font-extrabold leading-tight tracking-tight mb-6">
-              The React Framework for Production
+              {isLoading ? 'Loading...' : (webhookData && webhookData.length > 0 ? webhookData[0].Artist : 'The React Framework for Production')}
             </h1>
             <p className="text-xl text-[#C7C7C7] leading-relaxed max-w-2xl mx-auto mb-8">
-              Next.js gives you the best developer experience with all the features you need for production: 
-              hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more.
+              {isLoading ? 'Loading content...' : (webhookData && webhookData.length > 0 ? webhookData[0].Title : 'Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="solid" size="lg" onClick={() => setIsInfoPanelOpen(true)}>
@@ -70,7 +105,9 @@ export default function Counter() {
       {/* Features Grid */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-12">What's in Next.js?</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">
+            {isLoading ? 'Loading...' : (webhookData && webhookData.length > 0 ? webhookData[0].Title : 'What\'s in Next.js?')}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <TileGridItem
               title="Zero Config"
