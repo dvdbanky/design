@@ -84,6 +84,17 @@ export default function Home() {
         amplitude={1.0}
         speed={0.5}
       />
+      
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A0A0A] bg-opacity-90 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-16 h-16 border-4 border-[#3A29FF] border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-lg text-[#C7C7C7] animate-pulse">Loading content...</p>
+          </div>
+        </div>
+      )}
+      
       <div className="relative z-10">
         <Navbar 
           language={language} 
