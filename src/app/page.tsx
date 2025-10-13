@@ -12,8 +12,32 @@ import InfoPanel from '@/components/InfoPanel';
 
 interface WebhookItem {
   row_number: number;
-  Artist: string;
-  Title: string;
+  HEADER: string;
+  col_2: string;   // Docs
+  col_3: string;   // API
+  col_4: string;   // Examples
+  col_5: string;   // Learn
+  col_6: string;   // Sign In
+  col_7: string;   // Get Started (navbar)
+  col_8: string;   // Main Header
+  col_9: string;   // Main Description
+  col_10: string;  // Get Started Button
+  col_11: string;  // View Documentation Button
+  col_12: string;  // Features Grid Title
+  col_13: string;  // Zero Config - title
+  col_14: string;  // Zero Config - description
+  col_15: string;  // Image Optimization - title
+  col_16: string;  // Image Optimization - description
+  col_17: string;  // TypeScript Support - title
+  col_18: string;  // TypeScript Support - description
+  col_19: string;  // Fast Refresh - title
+  col_20: string;  // Fast Refresh - description
+  col_21: string;  // API Routes - title
+  col_22: string;  // API Routes - description
+  col_23: string;  // Deploy Anywhere - title
+  col_24: string;  // Deploy Anywhere - description
+  col_25: string;  // Get Started in Seconds - title
+  col_26: string;  // Get Started in Seconds - description
 }
 
 type WebhookData = WebhookItem[];
@@ -22,15 +46,18 @@ export default function Home() {
   const [isInfoPanelOpen, setIsInfoPanelOpen] = useState(false);
   const [webhookData, setWebhookData] = useState<WebhookData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [language, setLanguage] = useState(1); // 1 = English, 2 = Spanish, 3 = Russian
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch('https://dvdbanky.app.n8n.cloud/webhook/fdc16ec6-6166-46c5-9733-f8180d398bc4', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
+          body: JSON.stringify({ language }),
         });
         
         if (response.ok) {
@@ -47,7 +74,7 @@ export default function Home() {
     };
 
     fetchData();
-  }, []);
+  }, [language]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white relative">
@@ -58,24 +85,35 @@ export default function Home() {
         speed={0.5}
       />
       <div className="relative z-10">
-        <Navbar />
+        <Navbar 
+          language={language} 
+          onLanguageChange={setLanguage}
+          texts={webhookData && webhookData.length > 0 ? {
+            docs: webhookData[0].col_2,
+            api: webhookData[0].col_3,
+            examples: webhookData[0].col_4,
+            learn: webhookData[0].col_5,
+            signIn: webhookData[0].col_6,
+            getStarted: webhookData[0].col_7
+          } : undefined}
+        />
       
       {/* Hero Section */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h1 className="text-6xl font-extrabold leading-tight tracking-tight mb-6">
-              {isLoading ? 'Loading...' : (webhookData && webhookData.length > 0 ? webhookData[0].Artist : 'The React Framework for Production')}
+              {isLoading ? 'Loading...' : (webhookData && webhookData.length > 0 ? webhookData[0].col_8 : 'The React Framework for Production')}
             </h1>
             <p className="text-xl text-[#C7C7C7] leading-relaxed max-w-2xl mx-auto mb-8">
-              {isLoading ? 'Loading content...' : (webhookData && webhookData.length > 0 ? webhookData[0].Title : 'Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more.')}
+              {isLoading ? 'Loading content...' : (webhookData && webhookData.length > 0 ? webhookData[0].col_9 : 'Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="solid" size="lg" onClick={() => setIsInfoPanelOpen(true)}>
-                Get Started
+                {isLoading ? 'Loading...' : (webhookData && webhookData.length > 0 ? webhookData[0].col_10 : 'Get Started')}
               </Button>
               <Button variant="ghost" size="lg">
-                View Documentation
+                {isLoading ? 'Loading...' : (webhookData && webhookData.length > 0 ? webhookData[0].col_11 : 'View Documentation')}
               </Button>
             </div>
           </div>
@@ -106,12 +144,12 @@ export default function Counter() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12">
-            {isLoading ? 'Loading...' : (webhookData && webhookData.length > 0 ? webhookData[0].Title : 'What\'s in Next.js?')}
+            {isLoading ? 'Loading...' : (webhookData && webhookData.length > 0 ? webhookData[0].col_12 : 'What\'s in Next.js?')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <TileGridItem
-              title="Zero Config"
-              description="Automatic code splitting, filesystem-based routing, and API routes. No configuration needed."
+              title={webhookData && webhookData.length > 0 ? webhookData[0].col_13 : 'Zero Config'}
+              description={webhookData && webhookData.length > 0 ? webhookData[0].col_14 : 'Automatic code splitting, filesystem-based routing, and API routes. No configuration needed.'}
               icon={
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -119,8 +157,8 @@ export default function Counter() {
               }
             />
             <TileGridItem
-              title="Image Optimization"
-              description="Built-in Image Optimization with automatic WebP/AVIF generation and lazy loading."
+              title={webhookData && webhookData.length > 0 ? webhookData[0].col_15 : 'Image Optimization'}
+              description={webhookData && webhookData.length > 0 ? webhookData[0].col_16 : 'Built-in Image Optimization with automatic WebP/AVIF generation and lazy loading.'}
               icon={
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -128,8 +166,8 @@ export default function Counter() {
               }
             />
             <TileGridItem
-              title="TypeScript Support"
-              description="Built-in TypeScript support with zero configuration required."
+              title={webhookData && webhookData.length > 0 ? webhookData[0].col_17 : 'TypeScript Support'}
+              description={webhookData && webhookData.length > 0 ? webhookData[0].col_18 : 'Built-in TypeScript support with zero configuration required.'}
               icon={
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -137,8 +175,8 @@ export default function Counter() {
               }
             />
             <TileGridItem
-              title="Fast Refresh"
-              description="Fast, reliable live-editing experience with instant feedback on your changes."
+              title={webhookData && webhookData.length > 0 ? webhookData[0].col_19 : 'Fast Refresh'}
+              description={webhookData && webhookData.length > 0 ? webhookData[0].col_20 : 'Fast, reliable live-editing experience with instant feedback on your changes.'}
               icon={
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -146,8 +184,8 @@ export default function Counter() {
               }
             />
             <TileGridItem
-              title="API Routes"
-              description="Create API endpoints with Serverless Functions that scale automatically."
+              title={webhookData && webhookData.length > 0 ? webhookData[0].col_21 : 'API Routes'}
+              description={webhookData && webhookData.length > 0 ? webhookData[0].col_22 : 'Create API endpoints with Serverless Functions that scale automatically.'}
               icon={
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z" />
@@ -155,8 +193,8 @@ export default function Counter() {
               }
             />
             <TileGridItem
-              title="Deploy Anywhere"
-              description="Deploy to any platform that supports Node.js, or use Vercel for zero-config deployment."
+              title={webhookData && webhookData.length > 0 ? webhookData[0].col_23 : 'Deploy Anywhere'}
+              description={webhookData && webhookData.length > 0 ? webhookData[0].col_24 : 'Deploy to any platform that supports Node.js, or use Vercel for zero-config deployment.'}
               icon={
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
@@ -171,9 +209,11 @@ export default function Counter() {
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">Get Started in Seconds</h2>
+            <h2 className="text-4xl font-bold mb-6">
+              {webhookData && webhookData.length > 0 ? webhookData[0].col_25 : 'Get Started in Seconds'}
+            </h2>
             <p className="text-lg text-[#C7C7C7]">
-              Create a new Next.js app with our interactive tutorial or start from scratch.
+              {webhookData && webhookData.length > 0 ? webhookData[0].col_26 : 'Create a new Next.js app with our interactive tutorial or start from scratch.'}
             </p>
           </div>
           
